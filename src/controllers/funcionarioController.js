@@ -2,6 +2,17 @@ const Funcionario = require('../models/funciorarios')
 
 
 
+
+async function getAll(req, res) {
+    const funcionario = await Funcionario.find()
+    res.json(funcionario)
+}
+
+
+
+
+
+
 async function create(req, res) {
 
     try {
@@ -33,6 +44,25 @@ async function getById(req, res) {
 
 }
 
+async function update(req, res) {
+    try {
+        const funcionarioAtualizado = await Funcionario.findByIdAndUpdate(req.params.id, req.body)
+        res.json(funcionarioAtualizado)
+    } catch (error) {
+        console.error("Erro ao criar funcionario:", error)
+        res.status(400).json({
+            mensagem: "Erro ao atualizar funcionario",
+            erro: error.mensagem
+        })
+
+    }
+}
+
+async function remove(req, res) {
+    await Funcionario.findByIdAndDelete(req.params.id)
+    res.json({ mensagem: "Funcionario excluido com sucesso!" })
+}
+
 
 
 
@@ -45,8 +75,9 @@ async function getById(req, res) {
 
 module.exports = {
     create,
-    getById
-
-
+    getById,
+    remove,
+    update,
+    getAll
 
 }

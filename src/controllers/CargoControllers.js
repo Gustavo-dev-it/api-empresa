@@ -9,23 +9,10 @@ async function getAll(req, res) {
 
 async function create(req, res) {
 
-    try {
         const cargo = new Cargo(req.body)
         const cargoCriado = await cargo.save()
         res.status(201).json(cargoCriado)
-    } catch (error) {
-
-        console.log(error)
-        res.status(400).json(
-
-            {
-                mensagem: "Ocorreu um erro ao cadastrar o cargo",
-                erro: error
-
-            }
-        )
-    }
-
+    
 }
 
 async function getAll(req, res) {
@@ -45,17 +32,17 @@ async function getById(req, res) {
 
 
 async function update(req, res) {
-    try {
+   
         const cargoAtualizado = await Cargo.findByIdAndUpdate(req.params.id, req.body)
-        res.json(cargoAtualizado)
-    } catch (error) {
-        console.error("Erro ao criar cargo:", error)
-        res.status(400).json({
-            mensagem: "Erro ao atualizar cargo",
-            erro: error.mensagem
-        })
+        if(cargoAtualizado){
+            res.status(200).json(atualizarCargo)
+        } 
+        
+        else {
+            res.status(404).json({mensagem: "Cargo não encontrado"})
 
-    }
+        }
+    
 }
 
 async function remove(req, res) {

@@ -3,22 +3,29 @@ const router = express.Router()
 
 const CargoController = require('../controllers/CargoControllers')
 
-const Cargo = require('../models/Cargo')
-
 const FuncionarioController = require('../controllers/funcionarioController')
-const Funcionario = require('../models/funciorarios')
 
 
+// validadores
+const {validarId} = require('../validators/IdValidator')
+const {cargoValidador} = require('../validators/CargoValidator') // CTRL espaço dentro do '{}' mostra o objeto correto
+  
 
-router.post('/cargos', CargoController.create) 
+
+// Cargos
+router.post('/cargos', cargoValidador, CargoController.create) 
 router.get('/cargos', CargoController.getAll) 
-router.get('/cargos/:id', CargoController.getById) 
+router.get('/cargos/:id', validarId, CargoController.getById) 
 router.put('/cargos/:id', CargoController.update) 
 router.delete('/cargos/:id', CargoController.remove) 
 
 // Funcionarios
 router.post('/funcionarios', FuncionarioController.create)
+router.get('/funcionarios', FuncionarioController.getAll)
 router.get('/funcionarios/:id', FuncionarioController.getById)
+router.put('/funcionarios/:id', FuncionarioController.update)
+router.delete('/funcionarios/:id', FuncionarioController.remove)
+
 
 
 
