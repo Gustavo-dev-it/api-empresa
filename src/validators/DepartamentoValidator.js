@@ -1,4 +1,4 @@
-// Comando para inicializar a biblioteca chamada yup
+ //Comando para inicializar a biblioteca chamada yup
 const yup = require('yup')
 
 //Estrutura
@@ -15,18 +15,18 @@ const departamentoSchema = yup.object().shape({
 })
 
 
-// Middelewares intermediarios de validação
+ // Middelewares intermediarios de validação
 
 function departamentoValidador(req, res, next) {
 
     departamentoSchema
-        .validade(req.body, { abortEarly: false }) // abortEarly: false, evita que devolva a reposta no primeiro erro
+        .validate(req.body, { abortEarly: false }) // abortEarly: false, evita que devolva a reposta no primeiro erro
         .then(() => next())
         .catch(err => {
 
-            const errors = err.inner.map(e => {
+           const errors = err.inner.map(e => {
 
-                const erro = {
+               const erro = {
 
                     campo: e.path,
                     erros: e.errors
@@ -38,7 +38,7 @@ function departamentoValidador(req, res, next) {
             })
 
 
-        })
+        }) 
 
 }
 

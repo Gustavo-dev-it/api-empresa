@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const { date } = require('yup')
 
 
 // Estrutura da coleção 
@@ -9,26 +10,63 @@ nome: {
 type: String,
 required : true
 },
+cpf:{
+type: String,
+required: true
+},
+email:{
+    type : String,
+    required: true
+},
+dataContratacao:{
+    type: String,
+    required: true
+},
+
+genero:{
+    type: String,
+    required: true
+
+},
+
+telefone:{
+    type: String,
+    required: true
+},
+
+endereco:{
+    cep: String,
+    logradouro: String,
+    complemento: String,
+    bairro: String,
+    localidade: String,
+    UF: String,
+    numero: String,
+},
 
 dataNascimento: {
     type: String,
     required : true
 },
 
-email: {
-    type: String,
-    required: true,
-    lowercase: true,
-    trin: true,
-    unique: true
-
-},
 
     cargo: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'cargo',
     required: false
-        }   
+        },
+    
+        departamento:{
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: 'departamento',
+            required: false
+        },
+
+
+
+
+
+
 
     },
     {

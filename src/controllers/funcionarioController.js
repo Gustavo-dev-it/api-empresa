@@ -1,61 +1,44 @@
 const Funcionario = require('../models/funciorarios')
 
-
-
-
-async function getAll(req, res) {
-    const funcionario = await Funcionario.find()
-    res.json(funcionario)
-}
-
-
-
-
+//metodos 
 
 
 async function create(req, res) {
 
-    try {
-        const funcionario = new Funcionario(req.body)
-        const funciocarioCriado = await funcionario.save()
-        res.status(201).json(funciocarioCriado)
-    } catch (error) {
-
-        console.error("Erro ao criar funcionario", error)
-        res.status(400).json(
-
-            {
-                mensagem: "Ocorreu um erro ao cadastrar o funcionario",
-                erro: error.message
-
-            }
-        )
-    }
+    const funcionario = new Funcionario(req.body)
+    const funcionarioCriado = await funcionario.save()
+    res.status(201).json(funcionarioCriado)
 
 }
 
+async function getAll(req, res) {
+    res.json(await Funcionario.find())
+}
+
+
 async function getById(req, res) {
-    const funcioario = await Funcionario.findById(req.params.id).populate('cargo')
-    if (funcioario) {
-        res.json(funcioario)
+    const funcionario = await Funcionario.findById(req.params.id)
+    if (funcionario) {
+        res.json(funcionario)
     } else {
         res.status(404).json({ mensagem: "funcionario não encontrado" })
     }
 
 }
 
+
 async function update(req, res) {
-    try {
-        const funcionarioAtualizado = await Funcionario.findByIdAndUpdate(req.params.id, req.body)
-        res.json(funcionarioAtualizado)
-    } catch (error) {
-        console.error("Erro ao criar funcionario:", error)
-        res.status(400).json({
-            mensagem: "Erro ao atualizar funcionario",
-            erro: error.mensagem
-        })
+
+    const funcionarioAtualizado = await Funcionario.findByIdAndUpdate(req.params.id, req.body)
+    if (funcionarioAtualizado) {
+        res.status(200).json(atualizarFuncionario)
+    }
+
+    else {
+        res.status(404).json({ mensagem: "Funcionario não encontrado" })
 
     }
+
 }
 
 async function remove(req, res) {
@@ -74,10 +57,10 @@ async function remove(req, res) {
 
 
 module.exports = {
+    getAll,
     create,
     getById,
-    remove,
     update,
-    getAll
+    remove
 
 }

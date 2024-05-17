@@ -12,16 +12,17 @@ const DepartamentoController= require('../controllers/DepartamentoControllers')
 const {validarId} = require('../validators/IdValidator')
 const {cargoValidador} = require('../validators/CargoValidator') // CTRL espaço dentro do '{}' mostra o objeto correto
 const {departamentoValidador} = require('../validators/DepartamentoValidator')
+const {funcionarioValidador} = require('../validators/funcionarioValidator')
 
 
 // Cargos
 router.post('/cargos', cargoValidador, CargoController.create) 
 router.get('/cargos', CargoController.getAll) 
 router.get('/cargos/:id', validarId, CargoController.getById) 
-router.put('/cargos/:id', CargoController.update) 
-router.delete('/cargos/:id', CargoController.remove) 
+router.put('/cargos/:id', validarId, CargoController.update) 
+router.delete('/cargos/:id', validarId, CargoController.remove) 
 
-// Funcionarios
+// Funcionarios  
 router.post('/funcionarios', FuncionarioController.create)
 router.get('/funcionarios', FuncionarioController.getAll)
 router.get('/funcionarios/:id', validarId, FuncionarioController.getById)

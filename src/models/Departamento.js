@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 // Estrutura da coleção
 
-const Schema = new mongoose.Schema({
+const schema = new mongoose.Schema({
 
     nome: {
         type: String,
@@ -23,3 +23,5 @@ const Schema = new mongoose.Schema({
 
 
 )
+const Departamento = mongoose.model('departamento', schema)
+module.exports = Departamento
