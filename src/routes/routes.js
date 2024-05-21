@@ -5,14 +5,21 @@ const CargoController = require('../controllers/CargoControllers')
 
 const FuncionarioController = require('../controllers/funcionarioController')
 
-const DepartamentoController= require('../controllers/DepartamentoControllers')
+const DepartamentoController = require('../controllers/DepartamentoControllers')
 
+const ProjetoController = require('../controllers/projetoControllers')
+
+const TarefaController = require ('../controllers/tarefaController')
 
 // validadores
 const {validarId} = require('../validators/IdValidator')
 const {cargoValidador} = require('../validators/CargoValidator') // CTRL espaço dentro do '{}' mostra o objeto correto
 const {departamentoValidador} = require('../validators/DepartamentoValidator')
 const {funcionarioValidador} = require('../validators/funcionarioValidator')
+const {projetoValidador} = require('../validators/ProjetoValidator')
+const {tarefaValidador} = require('../validators/tarefaValidator')
+
+const {checarToken} = require('../validators/autenticacao.Validator')
 
 
 // Cargos
@@ -36,6 +43,23 @@ router.get('/departamentos', DepartamentoController.getAll)
 router.get('/departamentos/:id',validarId, DepartamentoController.getById)
 router.put('/departamentos/:id', DepartamentoController.update)
 router.delete('/departamento/:id', DepartamentoController.remove)
+
+// Projetos
+
+router.post('/projetos', ProjetoController.create) 
+router.get('/projetos', ProjetoController.getAll) 
+router.get('/projetos/:id', validarId, ProjetoController.getById) 
+router.put('/projetos/:id', validarId, ProjetoController.update) 
+router.delete('/projetos/:id', validarId, ProjetoController.remove) 
+
+
+// Tarefas
+
+router.post('/projetos', TarefaController.create) 
+router.get('/projetos', TarefaController.getAll) 
+router.get('/projetos/:id', validarId, TarefaController.getById) 
+router.put('/projetos/:id', validarId, TarefaController.update) 
+router.delete('/projetos/:id', validarId, TarefaController.remove) 
 
 
 
