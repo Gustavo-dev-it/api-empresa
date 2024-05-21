@@ -19,7 +19,7 @@ const {funcionarioValidador} = require('../validators/funcionarioValidator')
 const {projetoValidador} = require('../validators/ProjetoValidator')
 const {tarefaValidador} = require('../validators/tarefaValidator')
 
-const {checarToken} = require('../validators/autenticacao.Validator')
+
 
 
 // Cargos

@@ -14,8 +14,10 @@ const DBConection = require('./database/connection')
 app.use(express.json())
 
 const router = require ('./routes/routes')
+const { checarToken } = require('./validators/autenticacao.Validator')
 
-app.use(router)
+
+app.use("/", checarToken, router)
 
 
 
